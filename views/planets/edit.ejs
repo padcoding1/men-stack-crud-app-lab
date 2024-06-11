@@ -1,0 +1,43 @@
+<!-- views/planets/new.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Planet</title>
+  </head>
+<body>
+    <%- include('../partials/navbar') %>
+    <h1>Edit Planet Details</h1>
+    <form action="/planets/<%=planet._id%>?_method=PUT" method="POST">
+      <label for="name">Planet Name:</label>
+      <input type="text" name="name" id="name" value="<%= planet.name %>"/>
+      <label for="nickname">Nickname:</label>
+      <input type="text" name="nickname" id="nickname" value="<%= planet.nickname %>" />
+      
+      <label for="isPopulationQuelled">Population Quelled?</label>
+      <input type="checkbox" name="isPopulationQuelled" id="isPopulationQuelled" 
+      <% if (planet.isPopulationQuelled) { %>checked<% } %> onClick="checkGlassed(this)"/>
+
+      <label for="isGlassed">Planet was GLASSED?</label>
+      <input type="checkbox" name="isGlassed" id="isGlassed" 
+      <% if (planet.isGlassed) { %>checked<% } %>onClick="checkGlassed(this)"/>
+  
+      <button type="submit">Update</button>
+    </form>
+    <script>
+        function checkGlassed(checkbox){
+            console.log("Checking if Glassed...")
+            let glassBox = document.getElementById("isGlassed");
+            let popBox = document.getElementById("isPopulationQuelled");
+            if(glassBox.checked) {
+                document.getElementById("isPopulationQuelled").disabled = true;
+                document.getElementById("isPopulationQuelled").checked = false;
+            }
+            else
+                document.getElementById("isPopulationQuelled").disabled = false;
+        }
+    </script>
+  </body>
+</html>

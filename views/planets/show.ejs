@@ -1,0 +1,21 @@
+<!-- views/planets/show.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= planet.name %> Details</title>
+  </head>
+<body>
+    <%- include('../partials/navbar') %>
+    <h1><%= planet.name %></h1>
+    <h2><%if (planet.isGlassed === true) { %> <span style="color:red; font-weight:bold;">GLASSED</span><%}%></h2></li>
+    <h2>Nickname: <%= planet.nickname %></h2></li>
+    <a href="/planets/<%=planet._id%>/edit"><button>Edit <% planet.name %></button>
+    <br>
+    <br>
+    <form action="/planets/<%=planet._id%>?_method=DELETE" method="POST">
+        <button style="color:red;" type="submit">Delete <% planet.name %></button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!-- views/planets/planetlist.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List of Conquered Planets</title>
+  </head>
+  <body>
+	<%- include('../partials/navbar') %>
+    <h1>All Conquered Planets</h1>
+    
+	<h4>Planets Under Your Heel</h4> 
+		<% allPlanets.filter( (planet) => { %>
+			<% if (planet.isPopulationQuelled === true) {%>
+				<% listPlanets(planet) }})%>
+		<h4>Planets Needing the Iron Rod</h4> 
+		<% allPlanets.filter( (planet) => { %>
+			<% if (planet.isPopulationQuelled === false && planet.isGlassed === false) {%>
+				<% listPlanets(planet) }})%>
+		<h4>Glassed (Oops.)</h4>
+		<% allPlanets.filter( (planet) => { %>
+			<% if (planet.isGlassed === true) {%>
+				<% listPlanets(planet) }})%>
+		<% function listPlanets(planet) { %>
+			<ul>
+				<li><h5>Name: <a href="/planets/<%= planet._id %>"><%= planet.name %></a><%if (planet.isGlassed === true) { %> <span style="color:red; font-weight:bold;">GLASSED</span><%}%></h5></li>
+                <li><h5>Nickname: <%= planet.nickname %></h5></li>
+			</ul>
+        <% } %>
+
+
+  </body>
+</html>
