@@ -59,6 +59,23 @@ app.get("/planets/:planetId/edit", async (req, res) => {
    res.render("./planets/edit.ejs", { planet: foundPlanet});
 });
 
+// PUT /
+app.put("/planets/:planetId", async (req, res) => {
+    if (req.body.isPopulationQuelled === "on") {
+        req.body.isPopulationQuelled = true;
+  } else {
+      req.body.isPopulationQuelled = false;
+  }
+  if (req.body.isGlassed === "on") {
+      req.body.isGlassed = true;
+  } else {
+      req.body.isGlassed = false;
+  }
+
+  await Planet.findByIdAndUpdate(req.params.planetId, req.body);
+  res.redirect(`/planets/${req.params.planetId}`);
+ });
+
 // DELETE /
 app.delete("/planets/:planetId", async (req, res) => {
     await Planet.findByIdAndDelete(req.params.planetId);
